@@ -1,0 +1,13 @@
+{% load staticfiles %}
+<html>
+<head>
+  <title>{% block title %}Beer Rater{% endblock %}</title>
+  <link href="{% static "bootstrap.css" %}" rel="stylesheet">
+  {% block css %}
+  {% endblock %}
+</head>
+<body>
+{% block content %}
+{% endblock %}
+</body>
+</html>
