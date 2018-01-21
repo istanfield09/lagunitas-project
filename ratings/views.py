@@ -1,8 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic.base import View
 
 from ratings.models import Rating
-from ratings.forms import RatingForm, RatingEditForm
+from ratings.forms import RatingForm, RatingEditForm, RatingDeleteForm
 
 
 def home(request):
@@ -36,28 +36,32 @@ class RatingEdit(View):
     template_name = 'ratings/edit_rating_form.html'
 
     def get(self, request, rating_id):
-        try:
-            rating = Rating.objects.get(pk=rating_id)
-        except:
-            return redirect(home)
+        rating = get_object_or_404(Rating, id=rating_id)
 
         data = {'score': rating.score, 'notes': rating.notes,
-                'beer_name': rating.beer_name}
+                'beer_name': rating.beer_name }
         form = self.form_class(data)
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {'form': form, 'id': rating_id})
 
     def post(self, request, rating_id):
-        try:
-            rating = Rating.objects.get(pk=rating_id)
-        except:
-            return redirect(home)
-        
-        fields = ['score', 'notes', 'beer_name']
-        for field in fields:
-            if request.POST.get(field, None):
-                setattr(rating, field, request.POST.get(field))
-
-        if not rating.save():
+        rating = get_object_or_404(Rating, id=rating_id)
+        form = RatingEditForm(request.POST or None, instance=rating)
+        if form.is_valid():
+            form.save()
             return redirect(home)
         return render(request, self.template_name, {'form': form})
+
+        
+class RatingDelete(View):    
+    def post(self, request, rating_id): 
+        rating = get_object_or_404(Rating, id=rating_id)
+        form = RatingDeleteForm(request.POST, instance=rating)
+        if form.is_valid():
+            rating.delete()
+        return redirect(home)
+
+
+
+
+
 

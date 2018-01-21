@@ -16,11 +16,12 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
-from ratings.views import home, RatingCreate, RatingEdit
+from ratings.views import home, RatingCreate, RatingEdit, RatingDelete
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', home, name='rating-home'),
     url(r'rating/add/$', RatingCreate.as_view(), name='rating-add'),
     url(r'rating/(?P<rating_id>[0-9])/$', RatingEdit.as_view(), name='rating-edit'),
+    url(r'rating/(?P<rating_id>[0-9])/delete$', RatingDelete.as_view(), name='rating-delete'),
 ]

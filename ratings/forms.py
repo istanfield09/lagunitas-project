@@ -11,3 +11,8 @@ class RatingEditForm(forms.ModelForm):
     class Meta:
         model = Rating
         fields = ['id', 'beer_name', 'score', 'notes']
+
+class RatingDeleteForm(forms.ModelForm):
+    class Meta:
+        model = Rating
+        fields = []
