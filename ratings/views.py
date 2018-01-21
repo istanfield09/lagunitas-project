@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.generic.base import View
 
 from ratings.models import Rating
-from ratings.forms import RatingForm
+from ratings.forms import RatingForm, RatingEditForm
 
 
 def home(request):
@@ -28,5 +28,36 @@ class RatingCreate(View):
         if form.is_valid():
             _ = form.save()
             return redirect(home)
-        return render(request, self.template_name, {'form: form'})
+        return render(request, self.template_name, {'form': form})
+
+class RatingEdit(View):
+    """ Edit an existing Rating """
+    form_class = RatingEditForm
+    template_name = 'ratings/edit_rating_form.html'
+
+    def get(self, request, rating_id):
+        try:
+            rating = Rating.objects.get(pk=rating_id)
+        except:
+            return redirect(home)
+
+        data = {'score': rating.score, 'notes': rating.notes,
+                'beer_name': rating.beer_name}
+        form = self.form_class(data)
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request, rating_id):
+        try:
+            rating = Rating.objects.get(pk=rating_id)
+        except:
+            return redirect(home)
+        
+        fields = ['score', 'notes', 'beer_name']
+        for field in fields:
+            if request.POST.get(field, None):
+                setattr(rating, field, request.POST.get(field))
+
+        if not rating.save():
+            return redirect(home)
+        return render(request, self.template_name, {'form': form})
 

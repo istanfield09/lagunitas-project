@@ -16,7 +16,11 @@
           <tbody>
           {% for rating in ratings %}
             <tr>
-              <td>{{ rating.beer_name }}</td>
+              <td>
+                <a href = "/rating/{{ rating.id }}">
+                  {{ rating.beer_name }}
+                </a>
+              </td>
               <td>{{ rating.score }}</td>
               <td>{{ rating.notes }}</td>
             </tr>
