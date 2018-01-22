@@ -39,6 +39,7 @@ Instructions
 4. Run the database migrations: `python manage.py migrate`
 5. Run the Django development server: `python manage.py runserver`
 6. Navigate your browser to [http://127.0.0.1:8000/](http://127.0.0.1:8000/). You should see a table with two beer ratings already present.
+7. You can also run the tests: `python manage.py test`
 
 If you want to install any additional python libraries, please use the `pip` installed with virtualenv, and update the `requirements.txt` appropriately, so we can run the same code.
 
