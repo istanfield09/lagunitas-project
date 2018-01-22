@@ -33,11 +33,12 @@ Instructions
 
 (These are assumed to be run from within the directory where this file is.)
 
-1. `virtualenv ./venv`
-2. `source venv/bin/activate`
-3. `pip install -r requirements.txt`
-4. `./manage.py runserver`
-5. Navigate your browser to [http://127.0.0.1:8000/](http://127.0.0.1:8000/). You should see a table with two beer ratings already present.
+1. Create a virtual environment: `virtualenv ./venv`
+2. Activate the virtual environment: `source venv/bin/activate`
+3. Install project dependencies: `pip install -r requirements.txt`
+4. Run the database migrations: `python manage.py migrate`
+5. Run the Django development server: `python manage.py runserver`
+6. Navigate your browser to [http://127.0.0.1:8000/](http://127.0.0.1:8000/). You should see a table with two beer ratings already present.
 
 If you want to install any additional python libraries, please use the `pip` installed with virtualenv, and update the `requirements.txt` appropriately, so we can run the same code.
 
