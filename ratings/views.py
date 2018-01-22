@@ -11,7 +11,7 @@ def home(request):
     :param request: Django request object
     :return: rendered homepage
     """
-    context = {'ratings': Rating.objects.all()}
+    context = {'ratings': Rating.objects.all(), 'form': RatingForm()}
     return render(request, 'home.html', context)
 
 
@@ -20,16 +20,13 @@ class RatingCreate(View):
     form_class = RatingForm
     template_name = 'ratings/rating_form.html'
 
-    def get(self, request):
-        form = self.form_class()
-        return render(request, self.template_name, {'form': form})
-
     def post(self, request):
         form = self.form_class(request.POST)
         if form.is_valid():
             _ = form.save()
             return redirect(home)
         return render(request, self.template_name, {'form': form})
+
 
 class RatingEdit(View):
     """ Edit an existing Rating """
@@ -42,11 +39,7 @@ class RatingEdit(View):
         form = self.form_class(model_to_dict(rating))
         return render(request, self.template_name, {'form': form, 'id': rating_id})
 
-    def post(self, request, rating_id):
-        if not request.method == 'POST':
-            return redirect(home)
-        
-        print "hello, world"
+    def post(self, request, rating_id): 
         rating = get_object_or_404(Rating, id=rating_id)
         form = RatingEditForm(request.POST, instance=rating)
         if form.is_valid():

@@ -29,8 +29,31 @@
           {% endfor %}
           </tbody>
         </table>
-        <div><a href="{% url 'rating-add' %}" class="btn btn-primary">New</a></div>
+        <div><div class="btn btn-primary" data-toggle="modal" data-target="#addRating">New Rating</a></div>
       </div>
     </div>
   </div>
+
+  <div class="modal fade" id="addRating" tabindex="-1" role="dialog" aria-labelledby="addRatingModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="addRatingModal">Submit a Rating</h4>
+        </div>
+
+        <form role="form" method="post" action="{% url 'rating-add' %}">
+          <div class="modal-body">  
+            {% csrf_token %}
+            {{ form }}
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
 {% endblock %}

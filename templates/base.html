@@ -2,6 +2,8 @@
 <html>
 <head>
   <title>{% block title %}Beer Rater{% endblock %}</title>
+  <script type="text/javascript" src="{% static "jquery-3.2.1.min.js" %}"></script>
+  <script type="text/javascript" src="{% static "bootstrap.js" %}"></script>
   <link href="{% static "bootstrap.css" %}" rel="stylesheet">
   {% block css %}
   {% endblock %}
@@ -9,5 +11,8 @@
 <body>
 {% block content %}
 {% endblock %}
+
+  <script type="text/javascript" src="{% static "jquery-3.2.1.min.js" %}"></script>
+  <script type="text/javascript" src="{% static "bootstrap.js" %}"></script>
 </body>
 </html>
