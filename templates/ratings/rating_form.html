@@ -8,6 +8,7 @@
         <form role="form" method="post">
           {% csrf_token %}
           <p>Beer Name: {{ form.beer_name }}</p>
+          <p>Brewery Name: {{ form.brewery_name }}</p>
           <p>Score: {{ form.score }}</p>
           <p>Notes: {{ form.notes }}</p>
           <p><button type="submit" class="btn btn-primary">Submit</button></p>

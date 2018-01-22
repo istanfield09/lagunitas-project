@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic.base import View
+from django.forms.models import model_to_dict
 
 from ratings.models import Rating
 from ratings.forms import RatingForm, RatingEditForm, RatingDeleteForm
@@ -38,14 +39,16 @@ class RatingEdit(View):
     def get(self, request, rating_id):
         rating = get_object_or_404(Rating, id=rating_id)
 
-        data = {'score': rating.score, 'notes': rating.notes,
-                'beer_name': rating.beer_name }
-        form = self.form_class(data)
+        form = self.form_class(model_to_dict(rating))
         return render(request, self.template_name, {'form': form, 'id': rating_id})
 
     def post(self, request, rating_id):
+        if not request.method == 'POST':
+            return redirect(home)
+        
+        print "hello, world"
         rating = get_object_or_404(Rating, id=rating_id)
-        form = RatingEditForm(request.POST or None, instance=rating)
+        form = RatingEditForm(request.POST, instance=rating)
         if form.is_valid():
             form.save()
             return redirect(home)
