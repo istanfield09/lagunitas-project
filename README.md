@@ -19,10 +19,10 @@ You will be graded on correctness, the cleanliness/readability of your code, and
 
 This is open-book! Feel free to look up anything you want. The [Django documentation](https://docs.djangoproject.com/en/1.11/) is very thorough.
 
-When you are done, please send an email to matthew.wyatt@lagunitas.com with instructions for retrieving and running your submission. Emailed submissions won't be accepted. If your instructions direct us to clone a git repo - that's bonus points!
+When you are done, please send an email to Matthew Wyatt with instructions for retrieving and running your submission. Emailed submissions won't be accepted. If your instructions direct us to clone a git repo - that's bonus points!
 
 ### Installation instructions
-The instructions assume you are running on a *nix OS, either OS X or Linux (they were only tested on OS X). If you are running on Windows, contact matthew.wyatt@lagunitas.com for support.
+The instructions assume you are running on a *nix OS, either OS X or Linux (they were only tested on OS X). If you are running on Windows, contact Matthew Wyatt for support.
 
 Prerequisites:
 
