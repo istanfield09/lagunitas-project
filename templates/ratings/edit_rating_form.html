@@ -8,16 +8,22 @@
         <h2>Edit this rating</h2>
         <form role="form" method="post">
           {% csrf_token %}
-          <p>Beer Name: {{ form.beer_name }}</p>
-          <p>Brewery Name: {{ form.brewery_name }}</p>
-          <p>Score: {{ form.score }}</p>
-          <p>Notes: {{ form.notes }}</p>
-          <p><button type="submit" class="btn btn-primary">Save</button></p>
+          {% load widget_tweaks %}
+          {% for field in form %}
+            <div class = "form-group">
+              {{ field.errors }}
+              {{ field.label_tag }} {{ field|add_class:"form-control" }}
+            </div>
+          {% endfor %}
+          <button type="submit" class="btn btn-primary">Save</button>
+          <a href = "{% url 'rating-home' %}"><button class="btn btn-primary">Cancel</button></a>
         </form>
+
         <form role="form" method="post" action="delete">
-          {% csrf_token %}
-          <p><button type="delete" class="btn btn-danger">Delete</button></p>
+          {% csrf_token %} 
+          <button type="delete" class="btn btn-danger">Delete</button>
         </form>
+
       </div>
     </div>
   </div>

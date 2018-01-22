@@ -45,13 +45,20 @@
         <form role="form" method="post" action="{% url 'rating-add' %}">
           <div class="modal-body">  
             {% csrf_token %}
-            {{ form }}
+            {% load widget_tweaks %}
+              {% for field in form %}
+                <div class = "form-group">
+                  {{ field.errors }}
+                  {{ field.label_tag }} {{ field|add_class:"form-control" }}
+                </div>
+              {% endfor %}
           </div>
           <div class="modal-footer">
             <button type="submit" class="btn btn-primary">Submit</button>
             <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
           </div>
         </form>
+
       </div>
     </div>
   </div>

@@ -49,15 +49,11 @@ class RatingEdit(View):
 
         
 class RatingDelete(View):    
+    """ Delete an existing Rating"""
     def post(self, request, rating_id): 
         rating = get_object_or_404(Rating, id=rating_id)
         form = RatingDeleteForm(request.POST, instance=rating)
         if form.is_valid():
             rating.delete()
         return redirect(home)
-
-
-
-
-
 
